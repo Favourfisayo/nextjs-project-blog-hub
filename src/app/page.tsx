@@ -10,7 +10,7 @@ const navigation = [
   { name: 'Add Blogs', href: '/add-blog' },
 ]
 
-export default function page() {
+export default function Page() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
