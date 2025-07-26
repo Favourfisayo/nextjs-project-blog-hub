@@ -1,7 +1,8 @@
 "use client"
 import { updateBlogPost, State } from "@/app/lib/actions"
 import { useActionState } from "react"
-const EditForm = ({blog_id, data}: {blog_id: number, data: any}) => {
+import { Post } from "@/app/data/definiton"
+const EditForm = ({blog_id, data}: {blog_id: number, data:Post}) => {
     const updateBlogWithId = updateBlogPost.bind(null, blog_id)
     const initialState: State = {errors: {}, message: null}
     const [state, formAction] = useActionState(updateBlogWithId, initialState)

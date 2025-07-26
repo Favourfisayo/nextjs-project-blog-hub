@@ -1,7 +1,7 @@
 'use client'
 import { createBlogPost, State } from "../lib/actions"
 import { useActionState } from "react"
-export default function page() {
+export default function AddBlog() {
   const initialState:State = {message: null, errors: {}}
   const [state, formAction] = useActionState(createBlogPost, initialState)
   return (

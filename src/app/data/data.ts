@@ -31,7 +31,7 @@ export const fetchBlogPost = async (blog_id:number | null) => {
 
 export const fetchBlogPostById = async(blog_id:number) => {
     try {
-        const data = await sql`
+        const data = await sql<Post[]>`
         SELECT id, blog_title, content, tags
         FROM blog_posts WHERE id = ${blog_id}
         `

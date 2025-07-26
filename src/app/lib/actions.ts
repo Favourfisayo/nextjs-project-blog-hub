@@ -3,7 +3,6 @@ import {z} from "zod"
 import sql from "./db"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
-import { error } from "node:console"
 export type State = {
     errors: {
         blog_title?: string[],
