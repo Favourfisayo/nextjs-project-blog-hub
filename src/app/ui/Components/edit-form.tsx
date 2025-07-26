@@ -1,19 +1,21 @@
-'use client'
-import { createBlogPost, State } from "../lib/actions"
+"use client"
+import { updateBlogPost, State } from "@/app/lib/actions"
 import { useActionState } from "react"
-export default function page() {
-  const initialState:State = {message: null, errors: {}}
-  const [state, formAction] = useActionState(createBlogPost, initialState)
+const EditForm = ({blog_id, data}: {blog_id: number, data: any}) => {
+    const updateBlogWithId = updateBlogPost.bind(null, blog_id)
+    const initialState: State = {errors: {}, message: null}
+    const [state, formAction] = useActionState(updateBlogWithId, initialState)
   return (
+    <>
     <form
-        action={formAction}
+      action={formAction}
       className="w-full flex flex-col py-24 sm:py-32 items-center justify-center"
     >
       <div className="space-y-12 w-full max-w-4xl px-4">
         <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base/7 font-semibold text-gray-900">Add Blog</h2>
+          <h2 className="text-base/7 font-semibold text-gray-900">Update Blog</h2>
           <p className="mt-1 text-sm/6 text-gray-600">
-            Share your thoughts with the community. Markdown is supported in content.
+            Update the blog below. Markdown is supported in content.
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -28,6 +30,7 @@ export default function page() {
                   name="title"
                   type="text"
                   placeholder="Enter a descriptive title"
+                  defaultValue={data?.blog_title}
                   aria-describedby="blog-title"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
@@ -51,6 +54,7 @@ export default function page() {
                   name="content"
                   rows={10}
                   placeholder="Write your post in markdown..."
+                  defaultValue={data?.content}
                   aria-describedby="blog-content"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
@@ -74,6 +78,7 @@ export default function page() {
                   name="tags"
                   type="text"
                   aria-describedby="blog-tags"
+                  defaultValue={data?.tags}
                   placeholder="Comma separated e.g. nextjs, react, javascript"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
@@ -107,9 +112,12 @@ export default function page() {
           type="submit"
           className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          Publish
+          Update
         </button>
       </div>
     </form>
+    </>
   )
 }
+
+export default EditForm
